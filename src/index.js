@@ -49,7 +49,7 @@ Crafty.e('Matter, Color')
     .color('#BADA55');
 
 Crafty.e('Matter, Color')
-    .attr({ x: 10, y: 10, w: 10, h: 10, matter: {
+    .attr({ x: 10, y: 10, w: 30, h: 30, matter: {
         collisionFilter: {
             category: Common.CollisionGroups.GROUP_ARROW,
             mask: Common.CollisionGroups.GROUP_DEFAULT
@@ -58,7 +58,7 @@ Crafty.e('Matter, Color')
     .color('#BADA55');
 
 Crafty.e('Matter, Color')
-    .attr({ x: 10, y: 30, w: 10, h: 10, matter: {
+    .attr({ x: 10, y: 50, w: 30, h: 30, matter: {
         collisionFilter: {
             category: Common.CollisionGroups.GROUP_ARROW,
             mask: Common.CollisionGroups.GROUP_DEFAULT

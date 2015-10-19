@@ -22,6 +22,6 @@ Crafty.c('Line', {
         const endY = this.h;
 
         // log(startX, startY, endX, endY);
-        this.collision([startX, startY], [endX, endY]);
+        // this.collision([startX, startY], [endX, endY]);
     }
 });

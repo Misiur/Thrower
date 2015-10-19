@@ -14,6 +14,7 @@ global.paths = {
     js: './src',
     res: './res',
     dist: './dist',
+    modules: './node_modules',
 
     get scripts() {
         return this.js + '/**/*.js';

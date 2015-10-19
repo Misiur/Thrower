@@ -22,7 +22,8 @@ import jshint from 'gulp-jshint';
 import cached from 'gulp-cached';
 
 const browserifyConfig = {
-    paths: global.paths.js
+    paths: global.paths.js,
+    noParse: [require.resolve('matter-js')]
 };
 
 gulp.task('scripts', function () {
@@ -62,7 +63,9 @@ gulp.task('scripts', function () {
 
 function rebundle(bundler) {
     return bundler.bundle()            
-        .on('error', gutil.log.bind(gutil, gutil.colors.red('Browserify Error\n')))
+        .on('error', function (err) {
+            gutil.log(gutil.colors.red('Browserify Error\n'), err.message);
+        })
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(gulpif(global.isDevEnv, sourcemaps.init({

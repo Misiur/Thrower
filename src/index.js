@@ -6,7 +6,7 @@ window.error = debuglib('game:error');
 import Crafty from 'craftyjs';
 import Stats from 'stats.js';
 import raf from 'raf';
-import 'matter-js';
+import Common from 'Common';
 import 'crafty-matter';
 import 'Component/Player';
 import 'Component/Control';
@@ -48,14 +48,37 @@ Crafty.e('Matter, Color')
     } })
     .color('#BADA55');
 
-Game.Player = Crafty.e('Player');
+Crafty.e('Matter, Color')
+    .attr({ x: 10, y: 10, w: 10, h: 10, matter: {
+        collisionFilter: {
+            category: Common.CollisionGroups.GROUP_ARROW,
+            mask: Common.CollisionGroups.GROUP_DEFAULT
+        }
+    } })
+    .color('#BADA55');
+
+Crafty.e('Matter, Color')
+    .attr({ x: 10, y: 30, w: 10, h: 10, matter: {
+        collisionFilter: {
+            category: Common.CollisionGroups.GROUP_ARROW,
+            mask: Common.CollisionGroups.GROUP_DEFAULT
+        }
+    } })
+    .color('#BADA55');
 
 Bow.addComponent('Line').addComponent('Control').addComponent('Ground');
 
 Game.Bow = Bow;
 
 Crafty.e('Matter, Color')
-    .attr({ x: 400, y: 0, w: 20, h: 300, matter: {
+    .attr({ x: 400, y: 0, w: 20, h: 300, rotation: 45, matter: {
+        isStatic: true
+    } })
+    .color('#BADA55');
+
+
+Crafty.e('Matter, Color')
+    .attr({ x: 420, y: 100, w: 20, h: 300, matter: {
         isStatic: true
     } })
     .color('#BADA55');
@@ -64,10 +87,10 @@ let arrow = null;
 
 Crafty.bind('ControlFinished', function (e) {
     if (arrow) {
-        arrow.destroy();
+        // arrow.destroy();
     }
     
-    arrow = Crafty.e('Arrow').arrow(e);
+    arrow = Crafty.e('Arrow, SolidHitBox').arrow(e);
 });
 
 var stats = new Stats();

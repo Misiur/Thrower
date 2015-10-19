@@ -1,6 +1,7 @@
-## es6-gulp-browserify-game-template
+=======
+# Thrower
 
-This repository contains a basic project template for HTML5 games.
+Base for ES6 powered game
 
 ### Features:
 

@@ -15,7 +15,7 @@ import cached from 'gulp-cached';
 * in the game.
 */
 gulp.task('assets:imagemin', function() {
-   return gulp.src('./res/img/*.png')
+   return gulp.src('./res/img/**/*')
        .pipe(gulpif(!global.isDevEnv, cached('imagemin')))
        .pipe(gulp.dest(`${global.paths.dist}/res/img`));
 });

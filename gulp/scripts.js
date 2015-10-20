@@ -65,6 +65,7 @@ function rebundle(bundler) {
     return bundler.bundle()            
         .on('error', function (err) {
             gutil.log(gutil.colors.red('Browserify Error\n'), err.message);
+            this.emit('end');
         })
         .pipe(source('bundle.js'))
         .pipe(buffer())

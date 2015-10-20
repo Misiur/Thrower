@@ -5,22 +5,29 @@ import Matter from 'matter-js';
 Crafty.c('Arrow', {
 	init: function () {
 		this
-			.requires('Matter, Color')
+			.requires('2D, Canvas, Matter, Color')
 			.matter({
 				collisionFilter: {
 					category: Common.CollisionGroups.GROUP_ARROW,
 					mask: Common.CollisionGroups.GROUP_ALL & ~Common.CollisionGroups.GROUP_ARROW
 				}
 			})
-			.color('red');
+			.color('red')
+			.bind('EnterTarget', function (e) {
+				this.color('green');
+			})
+			.bind('ExitTarget', function (e) {
+				this.color('red');
+			});
+		;
 	},
 	arrow: function (e) {
 		this.attr({
-			x: e.startX, y: e.startY, w: 20, h: 10
+			x: e.startX, y: e.startY, w: 10, h: 2
 		});
 
-		const aspectRatioX = 0.01;
-		const aspectRatioY = 0.005;
+		const aspectRatioX = 0.0003;
+		const aspectRatioY = 0.0003;
 
 		Matter.Body.applyForce(this._body, this._body.position, { x: Math.cos(e.angle) * aspectRatioX, y: Math.sin(e.angle) * aspectRatioY });
 

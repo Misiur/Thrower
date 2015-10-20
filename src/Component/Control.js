@@ -19,6 +19,8 @@ Crafty.c('Control', {
 			return this;
 		}
 
+		this.addComponent('Line');
+		
 		this.started = true;
 
 		this.startX = this.endX = this.x = e.realX;
@@ -29,7 +31,7 @@ Crafty.c('Control', {
 	},
 	setDimensions: function (x, y) {
 		this.endX = x;
-		this.endY = y;
+		this.endY = y; 
 
 		const bboxBuffer = 2;
 
@@ -44,6 +46,8 @@ Crafty.c('Control', {
 	detachMoveHandler: function (e) {
 		this.setDimensions(e.realX, e.realY);
 		this.started = false;
+
+		this.removeComponent('Line');
 
 		Crafty.removeEvent(this, Crafty.stage.elem, 'mousemove', this.moveHandler);
 		Crafty.trigger('ControlFinished', {

@@ -9,6 +9,7 @@ import raf from 'raf';
 import Common from 'Common';
 import 'crafty-matter';
 import 'Component/Player';
+import 'Component/AngleCorrection';
 import 'Component/Control';
 import 'Component/Line';
 import 'Component/Bow';
@@ -45,24 +46,6 @@ let Bow = Crafty.e('Bow');
 Crafty.e('Matter, Color')
     .attr({ x: 0, y: 290, w: 600, h: 10, matter: {
         isStatic: true
-    } })
-    .color('#BADA55');
-
-Crafty.e('Matter, Color')
-    .attr({ x: 10, y: 10, w: 30, h: 30, matter: {
-        collisionFilter: {
-            category: Common.CollisionGroups.GROUP_ARROW,
-            mask: Common.CollisionGroups.GROUP_DEFAULT
-        }
-    } })
-    .color('#BADA55');
-
-Crafty.e('Matter, Color')
-    .attr({ x: 10, y: 50, w: 30, h: 30, matter: {
-        collisionFilter: {
-            category: Common.CollisionGroups.GROUP_ARROW,
-            mask: Common.CollisionGroups.GROUP_DEFAULT
-        }
     } })
     .color('#BADA55');
 

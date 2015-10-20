@@ -3,6 +3,7 @@ import Crafty from 'craftyjs';
 Crafty.c('Control', {
 	started: false,
 	init: function () {
+		this.requires('Mouse');
 		this.enableCapture();
 	},
 	enableCapture: function () {
@@ -20,8 +21,9 @@ Crafty.c('Control', {
 
 		this.started = true;
 
-		this.startX = this.x = e.x;
-		this.startY = this.y = e.y;
+		this.startX = this.endX = this.x = e.realX;
+		this.startY = this.endY = this.y = e.realY;
+		this.w = this.h = 0;
 
 		Crafty.addEvent(this, Crafty.stage.elem, 'mousemove', this.moveHandler);
 	},
@@ -30,10 +32,6 @@ Crafty.c('Control', {
 		this.endY = y;
 
 		const bboxBuffer = 2;
-
-		// this.x = this.y = 0;
-		// this.w = Crafty.viewport.width;
-		// this.h = Crafty.viewport.height;
 
 		this.x = Math.max(0, Math.min(this.startX, this.endX) - bboxBuffer);
 		this.y = Math.max(0, Math.min(this.startY, this.endY) - bboxBuffer);
@@ -44,7 +42,7 @@ Crafty.c('Control', {
 		this.distance = Crafty.math.distance(this.startX, this.startY, this.endX, this.endY);
 	},
 	detachMoveHandler: function (e) {
-		this.setDimensions(e.x, e.y);
+		this.setDimensions(e.realX, e.realY);
 		this.started = false;
 
 		Crafty.removeEvent(this, Crafty.stage.elem, 'mousemove', this.moveHandler);
@@ -58,6 +56,6 @@ Crafty.c('Control', {
 		});
 	},
 	moveHandler: function (e) {
-		this.setDimensions(e.x, e.y);
+		this.setDimensions(e.realX, e.realY);
 	}
 });

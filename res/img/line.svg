@@ -1,0 +1,16 @@
+<svg width="386" height="193" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <g transform="rotate(45 282.4695129394531,102.53049468994138) " id="svg_4">
+   <ellipse fill="#000000" stroke="#000000" stroke-width="0" cx="282.46952" cy="17.53048" id="svg_1" rx="30" ry="30"/>
+   <ellipse fill="#000000" stroke="#000000" stroke-width="0" cx="282.46952" cy="187.53048" rx="30" ry="30" id="svg_2"/>
+   <path id="svg_3" d="m272.469513,42.530479l20,0l0,120.000008l-20,0l0,-120.000008z" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000"/>
+  </g>
+  <g id="svg_5" transform="rotate(-45 102.53048706054683,102.53048706054683) ">
+   <ellipse id="svg_6" fill="#000000" stroke="#000000" stroke-width="0" cx="102.53049" cy="17.53048" rx="30" ry="30"/>
+   <ellipse id="svg_7" fill="#000000" stroke="#000000" stroke-width="0" cx="102.53049" cy="187.53048" rx="30" ry="30"/>
+   <path id="svg_8" d="m92.530487,42.530479l20,0l0,120.000008l-20,0l0,-120.000008z" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000"/>
+  </g>
+ </g>
+</svg>

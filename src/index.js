@@ -56,15 +56,16 @@ Game.Bow = Bow;
 Game.targets = [];
 
 for (let i = 0; i != 15; ++i) {
-    Game.targets.push(
-        Crafty.e('Target').attr({
-            x: 100 + i * 50, y: 0, w: 50, h: 300
-        })
-        .target({
-            hitColor: '#' + ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6)
-        })
-    );
-    log(('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6));
+    for (let j = 0; j != 6; ++j) {
+        Game.targets.push(
+            Crafty.e('Target').attr({
+                x: i * 50, y: j * 50, w: 50, h: 50
+            })
+            .target({
+                hitColor: '#' + ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6)
+            })
+        );
+    }
 }
 
 let arrow = null;

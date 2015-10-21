@@ -3,17 +3,15 @@ import Matter from 'matter-js';
 import Common from '../Common';
 
 Crafty.c('Target', {
+	_hitColor: 'black',
 	init: function () {
-		
 		this
-			.requires('Matter, Color')
-		    .attr({ x: 340, y: 190, w: 80, h: 100, 
-			    	matter: {
-				        isStatic: true,
-				        isPermeable: true
-			    	} 
+			.requires('2D, Canvas, Matter, Color')
+	    	.matter({
+		        isStatic: true,
+		        isPermeable: true
 			})
-		    .color('#ACDC55')
+		    .color(this._hitColor, 0.1)
 	    ;
 
 		Matter.Events.on(Crafty.Matter.engine, 'collisionStart', function (e) {
@@ -24,7 +22,7 @@ Crafty.c('Target', {
                 let pair = pairs[i];
                 if (pair.bodyA === this._body || pair.bodyB === this._body) {
                 	let target = pair.bodyA !== this._body ? pair.bodyA : pair.bodyB;
-                	target.entity.trigger('EnterTarget');
+                	target.entity.trigger('EnterTarget', { color: this._hitColor });
                 }
             }
 		}.bind(this));
@@ -41,5 +39,24 @@ Crafty.c('Target', {
                 }
             }
 		}.bind(this));
+
+		Object.defineProperty(this, 'hitColor', {
+			get: function () {
+				return this._hitColor;
+			},
+			set: function (value) {
+				this._hitColor = value;
+				this.color(value, 0.3);
+			}
+		})
+	},
+	target: function (config) {
+		if (typeof config === 'undefined') {
+			return this;
+		}
+
+		this.hitColor = config.hitColor || this.hitColor;
+	
+		return this;
 	}
 });

@@ -49,29 +49,23 @@ Crafty.background('#a5e8ff');
 
 let Bow = Crafty.e('Bow');
 
-Crafty.e('2D, Canvas, Matter, Color')
-    .attr({ x: 0, y: 290, w: 600, h: 10, matter: {
-        isStatic: true
-    } })
-    .color('#BADA55');
-
 Bow.addComponent('Control');
 
 Game.Bow = Bow;
 
-Crafty.e('2D, Canvas, Matter, Color')
-    .attr({ x: 420, y: 190, w: 20, h: 100, matter: {
-        isStatic: true
-    } })
-    .color('#BADA55');
+Game.targets = [];
 
-Crafty.e('2D, Canvas, Matter, Color')
-    .attr({ x: 320, y: 190, w: 20, h: 100, matter: {
-        isStatic: true
-    } })
-    .color('#BADA55');
-
-Game.target = Crafty.e('Target');
+for (let i = 0; i != 15; ++i) {
+    Game.targets.push(
+        Crafty.e('Target').attr({
+            x: 100 + i * 50, y: 0, w: 50, h: 300
+        })
+        .target({
+            hitColor: '#' + ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6)
+        })
+    );
+    log(('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6));
+}
 
 let arrow = null;
 

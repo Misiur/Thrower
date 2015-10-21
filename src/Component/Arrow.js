@@ -10,15 +10,17 @@ Crafty.c('Arrow', {
 				collisionFilter: {
 					category: Common.CollisionGroups.GROUP_ARROW,
 					mask: Common.CollisionGroups.GROUP_ALL & ~Common.CollisionGroups.GROUP_ARROW
-				}
+				},
+				frictionAir: 0.001
 			})
 			.color('red')
 			.bind('EnterTarget', function (e) {
-				this.color('green');
+				this.color(e.color);
 			})
-			.bind('ExitTarget', function (e) {
-				this.color('red');
-			});
+			// .bind('ExitTarget', function (e) {
+			// 	this.color('red');
+			// })
+			;
 		;
 	},
 	arrow: function (e) {
@@ -42,6 +44,9 @@ Crafty.c('Arrow', {
             for (let i = 0; i < pairs.length; i++) {
                 let pair = pairs[i];
                 if (pair.bodyA === this._body || pair.bodyB === this._body) {
+                	if (pair.bodyA.isPermeable || pair.bodyB.isPermeable) {
+                		continue;
+                	}
                 	// Matter.Body.setStatic(this._body, true);
                 	this.removeComponent('AngleCorrection');
                 }

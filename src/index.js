@@ -7,6 +7,7 @@ import Crafty from 'craftyjs';
 import Stats from 'stats.js';
 import raf from 'raf';
 import Common from 'Common';
+import Matter from 'matter-js';
 import 'crafty-matter';
 import 'Component/Player';
 import 'Component/AngleCorrection';
@@ -15,6 +16,7 @@ import 'Component/Line';
 import 'Component/Bow';
 import 'Component/Arrow';
 import 'Component/Target';
+import 'Component/Person';
 
 debuglib.enable('game:*');
 
@@ -23,50 +25,58 @@ window.Game = {};
 Game.settings = {
     width: 750,
     height: 300,
-    areaSize: 3
+    areaSize: 0.5,
+    debug: true
 };
 
 Crafty.init(Game.settings.width, Game.settings.height);
 
 // Unless performance is terrible
-// We'll stick with canvas
+// We'll stick with Canvas
 // Crafty.webgl.init();
 
 Crafty.Matter.init({
-    // debug: true,
+    debug: Game.settings.debug,
     gravity: {
         x: 0,
         y: 0.098
     },
     renderingMode: 'Canvas',
+    renderer: {
+        bounds: {
+            min: { x: Game.settings.width * Game.settings.areaSize / 2, y: 0 }, 
+            max: { x: Game.settings.width * Game.settings.areaSize , y: Game.settings.height } 
+        }
+    },
     bounds: {
-        min: { x: -Game.settings.width * Game.settings.areaSize / 2, y: 0 }, 
-        max: { x: Game.settings.width * Game.settings.areaSize / 2, y: Game.settings.height } 
+        min: { x: Game.settings.width * Game.settings.areaSize / 2, y: 0 }, 
+        max: { x: Game.settings.width * Game.settings.areaSize , y: Game.settings.height } 
     }
 });
 
 Crafty.background('#a5e8ff');
 
-let Bow = Crafty.e('Bow');
-
-Bow.addComponent('Control');
+let Bow = Crafty.e('Bow, Control');
 
 Game.Bow = Bow;
 
-Game.targets = [];
+Crafty.e('2D, Canvas, Matter, Color')
+    .attr({
+        x: Game.settings.width - 50, y: 0, w: 50, h: Game.settings.height, matter: {
+            isStatic: true
+        }
+    })
+    .color('#BADA55');
+;
 
-for (let i = 0; i != 15; ++i) {
-    for (let j = 0; j != 6; ++j) {
-        Game.targets.push(
-            Crafty.e('Target').attr({
-                x: i * 50, y: j * 50, w: 50, h: 50
-            })
-            .target({
-                hitColor: '#' + ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6)
-            })
-        );
-    }
-}
+Crafty.e('2D, Canvas, Matter, Color')
+    .attr({
+        x: 0, y: Game.settings.height - 50, w: Game.settings.width, h: 50, matter: {
+            isStatic: true
+        }
+    })
+    .color('#BADA55');
+;
 
 let arrow = null;
 
@@ -74,8 +84,20 @@ Crafty.bind('ControlFinished', function (e) {
     if (arrow) {
         // arrow.destroy();
     }
-    
-    arrow = Crafty.e('Arrow').arrow(e);
+
+    // const amount = 32;    
+    // const offset = Math.PI / (amount * 2);
+    // e.angle -= amount / 2 * offset;
+    // for(let i = 0; i != amount; ++i) {
+    //     e.angle += offset;
+    //     Crafty.e('Arrow').arrow(e);
+    // }
+    Crafty.e('Arrow').arrow(e);
+});
+
+Crafty.e('Person').person({
+    x: 300,
+    y: 0
 });
 
 var stats = new Stats();

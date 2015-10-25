@@ -8,6 +8,7 @@
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 import gulpif from 'gulp-if';
+import fs from 'fs'; 
 import livereload from 'gulp-livereload';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
@@ -37,9 +38,14 @@ gulp.task('scripts', function () {
             })));
 
         // on any es6 file change, perform a rebundle
+        let pathToJS = fs.realpathSync(global.paths.js);
         bro.on('update', function (changedFiles) {
             if (changedFiles) {
-                var lintStream = gulp.src(changedFiles)
+                let srcFiles = changedFiles.filter(function (filepath) {
+                    return filepath.indexOf(pathToJS) === 0;
+                });
+
+                var lintStream = gulp.src(srcFiles)
                     .pipe(cached('jshint'), { optimizeMemory: true })
                     .pipe(jshint())
                     .pipe(jshint.reporter('jshint-stylish'));

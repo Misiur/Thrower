@@ -25,7 +25,8 @@ window.Game = {};
 Game.settings = {
     width: 750,
     height: 300,
-    areaSize: 0.5,
+    areaSizeX: 0,
+    areaSizeY: 0,
     debug: true
 };
 
@@ -42,18 +43,19 @@ Crafty.Matter.init({
         y: 0.098
     },
     renderingMode: 'Canvas',
-    renderer: {
-        bounds: {
-            min: { x: Game.settings.width * Game.settings.areaSize / 2, y: 0 }, 
-            max: { x: Game.settings.width * Game.settings.areaSize , y: Game.settings.height } 
-        }
-    },
     bounds: {
-        min: { x: Game.settings.width * Game.settings.areaSize / 2, y: 0 }, 
-        max: { x: Game.settings.width * Game.settings.areaSize , y: Game.settings.height } 
+        min: {
+            x: -Game.settings.areaSizeX * Game.settings.width,
+            y: -Game.settings.areaSizeY * Game.settings.height
+        }, 
+        max: {
+            x: (Game.settings.areaSizeX + 1) * Game.settings.width,
+            y: (Game.settings.areaSizeY + 1) * Game.settings.height
+        } 
     }
 });
 
+log(Crafty.Matter.world.bounds);
 Crafty.background('#a5e8ff');
 
 let Bow = Crafty.e('Bow, Control');

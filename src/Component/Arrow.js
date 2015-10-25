@@ -42,7 +42,7 @@ Crafty.c('Arrow', {
 
 		Matter.Body.applyForce(this._body, this._body.position, { x: Math.cos(e.angle) * aspectRatioX, y: Math.sin(e.angle) * aspectRatioY });
 
-		// Crafty.viewport.follow(this, 0, 0);
+		Crafty.viewport.follow(this, 0, 0);
 
 		this.addComponent('AngleCorrection');
 

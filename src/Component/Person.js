@@ -14,7 +14,7 @@ Crafty.c('Person', {
 
 		let leftLeg = Crafty.e('Hittable, TrackVelocity, 2D, Canvas, Matter, Color')
 		    .attr({
-		        x: this.x, y: Game.settings.height - 70, w: 20, h: 20, label: 'leftLeg'
+		        x: this.x + 10, y: Game.settings.height - 105, w: 12, h: 40, label: 'leftLeg'
 		    })
 		    .color('blue');
 		;
@@ -23,27 +23,27 @@ Crafty.c('Person', {
 
 		let rightLeg = Crafty.e('Hittable, TrackVelocity, 2D, Canvas, Matter, Color')
 		    .attr({
-		        x: this.x + 30, y: Game.settings.height - 70, w: 20, h: 20, label: 'rightLeg'
+		        x: this.x + 30, y: Game.settings.height - 105, w: 12, h: 40, label: 'rightLeg'
 		    })
 		    .color('blue');
 		;
 		Matter.Composite.add(person, rightLeg._body);
-
+ 
 		let body = Crafty.e('Hittable, TrackVelocity, 2D, Canvas, Matter, Color')
 		    .attr({
-		        x: this.x + 10, y: Game.settings.height - 140, w: 30, h: 30, label: 'body',
+		        x: this.x + 10, y: Game.settings.height - 150, w: 30, h: 40, label: 'body',
 		    	matter: {
 	        		// isStatic: true
 	        	}
 		    })
 		    .color('blue');
-		;
+		; 
 
 		Matter.Composite.add(person, body._body);
 
 		let head = Crafty.e('Hittable, TrackVelocity, 2D, Canvas, Matter, Color')
 		    .attr({
-		        x: this.x + 15, y: Game.settings.height - 150, w: 20, h: 20, label: 'head',
+		        x: this.x + 15, y: Game.settings.height - 180, w: 20, h: 20, label: 'head',
 	        	matter: {
 	        		// isStatic: true
 	        	}
@@ -93,7 +93,7 @@ Crafty.c('Person', {
 		    bodyA: head._body,
 		    pointA: { x: -10, y: 10 },
 		    bodyB: body._body,
-		    pointB: { x: -15, y: -15 },
+		    pointB: { x: -15, y: -20 },
 			stiffness: 0.1
 		}));
 
@@ -101,7 +101,7 @@ Crafty.c('Person', {
 		    bodyA: head._body,
 		    pointA: { x: 10, y: 10 },
 		    bodyB: body._body,
-		    pointB: { x: 15, y: -15 },
+		    pointB: { x: 15, y: -20 },
 			stiffness: 0.1
 		}));
 
@@ -109,7 +109,7 @@ Crafty.c('Person', {
 		    bodyA: head._body,
 		    pointA: { x: -10, y: 10 },
 		    bodyB: body._body,
-		    pointB: { x: 15, y: -15 },
+		    pointB: { x: 15, y: -20 },
 			stiffness: 0.1
 		}));
 
@@ -117,7 +117,74 @@ Crafty.c('Person', {
 		    bodyA: head._body,
 		    pointA: { x: 10, y: 10 },
 		    bodyB: body._body,
-		    pointB: { x: -15, y: -15 },
+		    pointB: { x: -15, y: -20 },
+			stiffness: 0.1
+		}));
+
+		//Left leg
+		Matter.Composite.add(person, Matter.Constraint.create ({
+		    bodyA: leftLeg._body,
+		    pointA: { x: -5, y: -20 },
+		    bodyB: body._body,
+		    pointB: { x: -15, y: 20 },
+			stiffness: 0.1
+		}));
+
+		Matter.Composite.add(person, Matter.Constraint.create ({
+		    bodyA: leftLeg._body,
+		    pointA: { x: 5, y: -20 },
+		    bodyB: body._body,
+		    pointB: { x: -5, y: 20 },
+			stiffness: 0.1
+		}));
+
+		Matter.Composite.add(person, Matter.Constraint.create ({
+		    bodyA: leftLeg._body,
+		    pointA: { x: -5, y: -20 },
+		    bodyB: body._body,
+		    pointB: { x: -5, y: 20 },
+			stiffness: 0.1
+		}));
+
+		Matter.Composite.add(person, Matter.Constraint.create ({
+		    bodyA: leftLeg._body,
+		    pointA: { x: 5, y: -20 },
+		    bodyB: body._body,
+		    pointB: { x: -15, y: 20 },
+			stiffness: 0.1
+		}));
+
+
+		//Right leg
+		Matter.Composite.add(person, Matter.Constraint.create ({
+		    bodyA: rightLeg._body,
+		    pointA: { x: -5, y: -20 },
+		    bodyB: body._body,
+		    pointB: { x: 15, y: 20 },
+			stiffness: 0.1
+		}));
+
+		Matter.Composite.add(person, Matter.Constraint.create ({
+		    bodyA: rightLeg._body,
+		    pointA: { x: 5, y: -20 },
+		    bodyB: body._body,
+		    pointB: { x: 5, y: 20 },
+			stiffness: 0.1
+		}));
+
+		Matter.Composite.add(person, Matter.Constraint.create ({
+		    bodyA: rightLeg._body,
+		    pointA: { x: -5, y: -20 },
+		    bodyB: body._body,
+		    pointB: { x: 5, y: 20 },
+			stiffness: 0.1
+		}));
+
+		Matter.Composite.add(person, Matter.Constraint.create ({
+		    bodyA: rightLeg._body,
+		    pointA: { x: 5, y: -20 },
+		    bodyB: body._body,
+		    pointB: { x: 15, y: 20 },
 			stiffness: 0.1
 		}));
 
